@@ -1,0 +1,37 @@
+= Native query in Hibernate
+:hp-tags: java, hibernate, query
+
+[source,java]
+----
+String query = "select * from TABLE where COLUMN = '" + someStringParam + "'";
+Session session = HibernateSessionFactory.getSession();
+Query queryResult = session.createSQLQuery(query);	// queryResult.list()
+----
+
+[source,java]
+----
+Statement Stmt = null;
+Connection connection = null;
+try {
+    HibernateSessionFactory.beginTransaction();
+    connection = HibernateSessionFactory.getSession().connection();
+    Stmt = connection.createStatement();
+    ResultSet rSet = Stmt.executeQuery("some update query");
+
+    if (rSet.next()) {
+    	System.out.println(rSet.getString("COLUMN_NAME"));
+    }
+
+    HibernateSessionFactory.getSession().flush();
+    HibernateSessionFactory.commitTransaction();
+
+} catch (Exception e) {
+    e.printStackTrace();
+} finally {
+    try {
+           HibernateSessionFactory.closeSession();
+    } catch (PersistenceDataException e) {
+            e.printStackTrace();
+    }
+}
+----
