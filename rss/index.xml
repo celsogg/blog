@@ -1,4 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Untitled RSS Feed]]></description><link>https://celsogg.github.io/blog</link><generator>RSS for Node</generator><lastBuildDate>Thu, 09 Feb 2017 01:41:17 GMT</lastBuildDate><atom:link href="https://celsogg.github.io/blog/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[test]]></title><description><![CDATA[<div class="sect1">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Untitled RSS Feed]]></description><link>https://celsogg.github.io/blog</link><generator>RSS for Node</generator><lastBuildDate>Thu, 09 Feb 2017 02:10:50 GMT</lastBuildDate><atom:link href="https://celsogg.github.io/blog/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Native query in Hibernate]]></title><description><![CDATA[<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String query = "select * from TABLE where COLUMN = '" + someStringParam + "'";
+Session session = HibernateSessionFactory.getSession();
+Query queryResult = session.createSQLQuery(query);	// queryResult.list()</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Statement Stmt = null;
+Connection connection = null;
+try {
+    HibernateSessionFactory.beginTransaction();
+    connection = HibernateSessionFactory.getSession().connection();
+    Stmt = connection.createStatement();
+    ResultSet rSet = Stmt.executeQuery("some update query");
+
+    if (rSet.next()) {
+    	System.out.println(rSet.getString("COLUMN_NAME"));
+    }
+
+    HibernateSessionFactory.getSession().flush();
+    HibernateSessionFactory.commitTransaction();
+
+} catch (Exception e) {
+    e.printStackTrace();
+} finally {
+    try {
+           HibernateSessionFactory.closeSession();
+    } catch (PersistenceDataException e) {
+            e.printStackTrace();
+    }
+}</code></pre>
+</div>
+</div>]]></description><link>https://celsogg.github.io/blog/2017/02/08/Native-query-in-Hibernate.html</link><guid isPermaLink="true">https://celsogg.github.io/blog/2017/02/08/Native-query-in-Hibernate.html</guid><category><![CDATA[java]]></category><category><![CDATA[ hibernate]]></category><category><![CDATA[ query]]></category><pubDate>Wed, 08 Feb 2017 00:00:00 GMT</pubDate></item><item><title><![CDATA[test]]></title><description><![CDATA[<div class="sect1">
 <h2 id="_test_content">test content</h2>
 <div class="sectionbody">
 <div class="paragraph">
