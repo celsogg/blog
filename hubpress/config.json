@@ -4,7 +4,11 @@
     "repositoryName": "blog",
     "branch": "gh-pages"
   },
+  "site": {
+    "disqus": "celsoblog"
+  },
+  "socialnetwork": {},
   "theme": {
-    "name": "Casper"
+    "name": "casper"
   }
 }
